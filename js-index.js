@@ -1,6 +1,6 @@
 const settings = {
-    namaGithub: "putznolepz",
-    token_github: "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",
+    namaGithub: "Madzz14Str",
+    token_github: "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",
     fileRepo: "database.json",
     namaRepo: "Tes-Db",
     domain1: "https://putz.putznesia.com",
