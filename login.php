@@ -1,0 +1,29 @@
+<?php
+session_start();
+$data = json_decode(file_get_contents("database/data.json"), true);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $u = $_POST["username"];
+    $p = $_POST["password"];
+
+    foreach ($data as $user) {
+        if ($user["username"] === $u && $user["password"] === $p) {
+            $_SESSION["username"] = $u;
+            $_SESSION["role"] = $user["role"];
+            header("Location: " . ($user["role"] === "admin" ? "admin/index.php" : "cpanel.php"));
+            exit;
+        }
+    }
+
+    $error = "Login gagal!";
+}
+?>
+
+<link rel="stylesheet" href="database/style.css">
+<form method="post">
+  <h2>Login Panel</h2>
+  <input type="text" name="username" placeholder="Username" required>
+  <input type="password" name="password" placeholder="Password" required>
+  <input type="submit" value="Login">
+  <?= isset($error) ? "<p>$error</p>" : "" ?>
+</form>
